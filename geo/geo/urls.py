@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from coordinates.models import RequestHistoryViewSet
+from coordinates.viewsets import RequestHistoryViewSet
 
 router = routers.DefaultRouter()
 router.register('api/v1/history', RequestHistoryViewSet)
