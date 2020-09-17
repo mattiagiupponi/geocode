@@ -12,6 +12,12 @@
         <tr>
           <td><label>X-Coordinate:</label></td>
           <td><input v-model="xcoordinate" placeholder="y-coordinate"></td>
+          <td><label>Load from history</label></td>
+          <td>
+            <select v-model="history">
+              <option v-for="x in history" v-bind:value="x">{{x}}</option>
+            </select>
+          </td>
         </tr>
         <tr>
           <td><label>Y-Coordinate:</label></td>
@@ -43,16 +49,20 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'GetCoordinate',
   data () {
     return {
       msg: 'Simple form with the desired data',
       errors: [],
+      history: [],
       points: 0,
       xcoordinate: 0.0,
       ycoordinate: 0.0,
       selected: ''
     }
+  },
+  mounted () {
+    this.getRequestHistory(this)
   },
   methods: {
     checkForm: function (e) {
@@ -76,6 +86,22 @@ export default {
         this.errors.push('Selection is required')
       }
       e.preventDefault()
+    },
+    getRequestHistory (vm) {
+      fetch('http://127.0.0.1:8000/api/v1/history/', {
+        method: 'GET',
+        credentials: 'same-origin'
+      })
+        .then((response) => response.json())
+        .then(function(data) {
+          var historyList = []
+          var i
+          for (i = 0; i < data.length; i++) {
+            historyList.push(data[i]['request'])
+          }
+          vm.xcoordinate = historyList
+          console.log(vm.history)
+        })
     }
   }
 }

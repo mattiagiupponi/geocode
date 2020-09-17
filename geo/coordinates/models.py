@@ -15,6 +15,8 @@ class RequestHistory(models.Model):
     id = models.AutoField(primary_key=True)
     request = models.CharField(max_length=2000, null=True)
     timestamp = models.DateTimeField(default=timezone.now)
+    x_axes = models.FloatField(default=0)
+    y_axes = models.FloatField(default=0)
 
     def __str__(self):
         return self.request
