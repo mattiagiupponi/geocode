@@ -25,7 +25,7 @@ note: create a virtual environment (use the way you prefer, in this case i used 
 
 The UI project is based on the npm command for create an app with [VueJS](https://github.com/vuejs/vue-cli)
 
-```
+```markdown
 - install NPM -> https://www.npmjs.com/get-npm
 - sudo npm install -g vue-cli
 ```
@@ -36,6 +36,11 @@ The Application will run at this link: http://localhost:8081/#/
 
 the main code is available under ```src/components/GeoCoordinate.vue```
 
+Given a X,Y coordinates, nof points and the type of the action, a call to the backend will retrieve the desired data into the textbox present.
+
+Is possible also to see all the request made to re-use an old request. Once selected, the inputbox are automatically filled.
+  
+
 ----------
 <h5>Backend</h5>
 
@@ -44,12 +49,40 @@ The backend project is based on Django
 To run the backend app, move to ```geocode/geo``` and than run this command:
 ```python manange.py runserver```
 The Application will run at this link: http://localhost:8000/
-<h3>Import csv from CLI</h3>
+
+<h4>API</h4>
+
+There are two api available in the project:
+
+```markdown
+Getting the coordinates:
+
+URL: http://localhost:8000/api/v1/coordinates
+Params: - operation: REQUIRED -> nearest/coso
+        - x        : REQUIRED -> the X coordinate
+        - y        : REQUIRED -> the Y coordinate
+        - points   : REQUIRED -> The number of points to return
+
+Example: 
+http://localhost:8000/api/v1/coordinates?operation=nearest&x=880702.0&y=1432946.5&points=3
+------------------------------------------------------------------------------------
+
+Getting the request History
+(since there is no logic for this, i decided to use a simple Serializer from DjangoRestFramework)
+
+URL: http://localhost:8000/api/v1/coordinates
+Params: None
+
+Example: 
+http://127.0.0.1:8000/api/v1/history/
+```
+
+<h4>Import csv from CLI</h4>
 The software has a custom command to load the csv with the coordinates into the database.
 
 How to import the csv:
 
-````
+````markdown
 Move to geocode/geo/ and than use the following commands
 
 python manange.py importcsv "Absolute_path_of_the_file"
