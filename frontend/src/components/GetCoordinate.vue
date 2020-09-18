@@ -114,8 +114,7 @@ export default {
       this.checkForm()
       var instance = this
       if (this.errors.length === 0) {
-        var queryParam = 'operation=' + this.selected + '&x=' + this.xcoordinate + '&y=' + this.ycoordinate
-        console.log(queryParam)
+        var queryParam = 'operation=' + this.selected + '&x=' + this.xcoordinate + '&y=' + this.ycoordinate + '&points=' + this.points
         fetch('http://localhost:8000/api/v1/coordinates?' + queryParam, {
           method: 'GET',
           credentials: 'same-origin'
@@ -123,6 +122,7 @@ export default {
           .then((response) => response.json())
           .then(function(data) {
             instance.message = instance.message + data['result'] + '\n'
+            instance.getRequestHistory(instance)
           })
       } else {
         console.error('please fix the errors and select all options')

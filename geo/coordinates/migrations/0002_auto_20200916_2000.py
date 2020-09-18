@@ -6,23 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('coordinates', '0001_initial'),
+        ("coordinates", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='coordinate',
-            name='x_axes',
+            model_name="coordinate",
+            name="x_axes",
             field=models.FloatField(default=0),
         ),
         migrations.AddField(
-            model_name='coordinate',
-            name='y_axes',
+            model_name="coordinate",
+            name="y_axes",
             field=models.FloatField(default=0),
         ),
         migrations.AlterField(
-            model_name='requesthistory',
-            name='request',
+            model_name="requesthistory",
+            name="request",
             field=models.CharField(max_length=2000, null=True),
         ),
     ]

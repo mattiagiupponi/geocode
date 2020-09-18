@@ -6,10 +6,10 @@ from coordinates.models import RequestHistory, Coordinate
 class RequestHistorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = RequestHistory
-        fields = ['timestamp', 'request', 'x_axes', 'y_axes', 'points']
+        fields = ["timestamp", "request", "x_axes", "y_axes", "points"]
 
 
 class ClosesPointSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Coordinate
-        fields = ['']
+        fields = [""]

@@ -7,21 +7,20 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Coordinate',
+            name="Coordinate",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
             ],
         ),
         migrations.CreateModel(
-            name='RequestHistory',
+            name="RequestHistory",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('request', models.CharField(max_length=2000)),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("request", models.CharField(max_length=2000)),
             ],
         ),
     ]

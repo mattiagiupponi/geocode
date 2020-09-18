@@ -3,3 +3,5 @@ pandas
 djangorestframework
 django-cors-headers
 scipy
+black
+flake8

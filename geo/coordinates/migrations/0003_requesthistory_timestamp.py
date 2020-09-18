@@ -7,13 +7,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('coordinates', '0002_auto_20200916_2000'),
+        ("coordinates", "0002_auto_20200916_2000"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='requesthistory',
-            name='timestamp',
-            field=models.DateTimeField(default=datetime.datetime(2020, 9, 17, 11, 21, 41, 113408)),
+            model_name="requesthistory",
+            name="timestamp",
+            field=models.DateTimeField(
+                default=datetime.datetime(2020, 9, 17, 11, 21, 41, 113408)
+            ),
         ),
     ]

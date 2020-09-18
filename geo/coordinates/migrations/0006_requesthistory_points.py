@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('coordinates', '0005_auto_20200917_1855'),
+        ("coordinates", "0005_auto_20200917_1855"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='requesthistory',
-            name='points',
+            model_name="requesthistory",
+            name="points",
             field=models.IntegerField(default=0),
         ),
     ]

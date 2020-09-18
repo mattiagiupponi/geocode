@@ -4,5 +4,5 @@ from coordinates.serializers import RequestHistorySerializer
 
 
 class RequestHistoryViewSet(viewsets.ModelViewSet):
-    queryset = RequestHistory.objects.all().order_by('-timestamp')
+    queryset = RequestHistory.objects.all().order_by("-timestamp")
     serializer_class = RequestHistorySerializer
