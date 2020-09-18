@@ -12,5 +12,4 @@ class CoordinateObj:
 
     @staticmethod
     def _find(dataset, coordinate):
-        print(distance.cdist([coordinate], dataset))
         return distance.cdist([coordinate], dataset)

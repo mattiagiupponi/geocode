@@ -21,6 +21,7 @@ class RequestHistory(models.Model):
     x_axes = models.FloatField(default=0)
     y_axes = models.FloatField(default=0)
     points = models.IntegerField(default=0)
+    operation = models.CharField(max_length=300, default="N/A")
 
     def __str__(self):
         return self.request

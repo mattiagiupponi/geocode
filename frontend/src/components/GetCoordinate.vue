@@ -109,9 +109,11 @@ export default {
       this.xcoordinate = this.history.split('|')[0]
       this.ycoordinate = this.history.split('|')[1]
       this.points = this.history.split('|')[2]
+      this.selected = this.history.split('|')[3]
     },
     searchCoordinates (vm) {
       this.checkForm()
+      this.message = ""
       var instance = this
       if (this.errors.length === 0) {
         var queryParam = 'operation=' + this.selected + '&x=' + this.xcoordinate + '&y=' + this.ycoordinate + '&points=' + this.points
@@ -121,7 +123,11 @@ export default {
         })
           .then((response) => response.json())
           .then(function(data) {
-            instance.message = instance.message + data['result'] + '\n'
+            var i = 0
+            for (i = 0; i < data['result'].length; i++) {
+              console.log(i)
+              instance.message = instance.message + data['result'][i] + '\n'
+            }
             instance.getRequestHistory(instance)
           })
       } else {
