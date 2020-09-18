@@ -7,7 +7,7 @@
         <li v-for="error in errors">{{ error }}</li>
       </ul>
     </p>
-    <form @submit="checkForm" method="get" action="/">
+    <form method="get">
       <table>
         <tr>
           <td><label>X-Coordinate:</label></td>
@@ -34,18 +34,19 @@
           <td><label>Option:</label></td>
           <td>
             <select v-model="selected">
-              <option disabled value="">Please select one</option>
-              <option>Nearest</option>
+              <option>nearest</option>
               <option>furthest</option>
             </select>
           </td>
         </tr>
         <tr>
           <td>
-            <input type="submit" value="Get Coordinates">
+            <input type="submit" v-on:click=searchCoordinates(this) value="Get Coordinates">
           </td>
         </tr>
       </table>
+      <label style="float:left">Results:</label><br>
+      <textarea style="float:left" v-model="message" placeholder="coordinate results"></textarea>
     </form>
   </div>
 </template>
@@ -62,7 +63,8 @@ export default {
       points: 0,
       xcoordinate: 0.0,
       ycoordinate: 0.0,
-      selected: ''
+      selected: 'Selection',
+      message: ''
     }
   },
   mounted () {
@@ -87,7 +89,6 @@ export default {
       if (!this.selected) {
         this.errors.push('Selection is required')
       }
-      e.preventDefault()
     },
     getRequestHistory (vm) {
       fetch('http://127.0.0.1:8000/api/v1/history/', {
@@ -99,7 +100,7 @@ export default {
           var historyList = []
           var i
           for (i = 0; i < data.length; i++) {
-            historyList.push({text: data[i]['x_axes'] + '|' + data[i]['y_axes']  + '|' + data[i]['points']})
+            historyList.push({text: data[i]['x_axes'] + '|' + data[i]['y_axes'] + '|' + data[i]['points']})
           }
           vm.options = historyList
         })
@@ -108,6 +109,24 @@ export default {
       this.xcoordinate = this.history.split('|')[0]
       this.ycoordinate = this.history.split('|')[1]
       this.points = this.history.split('|')[2]
+    },
+    searchCoordinates (vm) {
+      this.checkForm()
+      var instance = this
+      if (this.errors.length === 0) {
+        var queryParam = 'operation=' + this.selected + '&x=' + this.xcoordinate + '&y=' + this.ycoordinate
+        console.log(queryParam)
+        fetch('http://localhost:8000/api/v1/coordinates?' + queryParam, {
+          method: 'GET',
+          credentials: 'same-origin'
+        })
+          .then((response) => response.json())
+          .then(function(data) {
+            instance.message = instance.message + data['result'] + '\n'
+          })
+      } else {
+        console.error('please fix the errors and select all options')
+      }
     }
   }
 }

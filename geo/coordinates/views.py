@@ -10,4 +10,4 @@ def find_coordinates(request):
     y = request.GET.get('y')
     coordinate_to_query = from_queryset_to_list_of_tuples(Coordinate.objects.all())
     closest_index = getattr(CoordinateObj, f"get_{operation}")(coordinate_to_query, (x, y))
-    return JsonResponse({operation: coordinate_to_query[closest_index]})
+    return JsonResponse({"result": coordinate_to_query[closest_index]})
