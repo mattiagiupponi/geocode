@@ -10,6 +10,9 @@ class Coordinate(models.Model):
     def __str__(self):
         return f"Coordinate: {self.x_axes}/{self.y_axes}"
 
+    def to_tuple(self):
+        return self.x_axes, self.y_axes
+
 
 class RequestHistory(models.Model):
     id = models.AutoField(primary_key=True)

@@ -9,5 +9,6 @@ router.register('api/v1/history', RequestHistoryViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/coordinates', include("coordinates.urls")),
     path('', include(router.urls)),
 ]

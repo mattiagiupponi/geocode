@@ -1,8 +1,7 @@
-from django.conf.urls import url
 from django.urls import path
 
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index')
+    path('', views.find_coordinates, name='find_closest_neighbour')
 ]

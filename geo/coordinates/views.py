@@ -1,12 +1,13 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
+from coordinates.models import Coordinate
+from coordinates.utils.coordinate import CoordinateObj
+from coordinates.utils.queryset import from_queryset_to_list_of_tuples
 
 
-@login_required(login_url='/admin/login/')
-def index(request):
-    return HttpResponse("Welcome to this Example, those are the api available")
-
-
-@login_required(login_url="admin/login/")
-def find_closest_neighbour(request):
-    return JsonResponse({"ciao": 223})
+def find_coordinates(request):
+    operation = request.GET.get('operation')
+    x = request.GET.get('x')
+    y = request.GET.get('y')
+    coordinate_to_query = from_queryset_to_list_of_tuples(Coordinate.objects.all())
+    closest_index = getattr(CoordinateObj, f"get_{operation}")(coordinate_to_query, (x, y))
+    return JsonResponse({operation: coordinate_to_query[closest_index]})

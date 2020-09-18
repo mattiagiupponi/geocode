@@ -42,7 +42,7 @@
         </tr>
         <tr>
           <td>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Get Coordinates">
           </td>
         </tr>
       </table>
