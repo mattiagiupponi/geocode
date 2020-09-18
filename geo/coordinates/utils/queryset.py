@@ -3,7 +3,7 @@ from datetime import datetime
 from coordinates.models import RequestHistory
 
 
-def from_queryset_to_list_of_tuples(queryset):
+def from_coordinates_qs_to_list(queryset):
     return [item.to_tuple() for item in queryset]
 
 

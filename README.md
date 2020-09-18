@@ -2,7 +2,7 @@ Software note:
 ------------------
 
 - Django 3.1
-- Sqlite (soon postgres)
+- Sqlite
 - python 3.8
 
 <h3>Import csv from CLI</h3>
