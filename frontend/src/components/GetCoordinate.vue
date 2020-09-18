@@ -11,17 +11,20 @@
       <table>
         <tr>
           <td><label>X-Coordinate:</label></td>
-          <td><input v-model="xcoordinate" placeholder="y-coordinate"></td>
+          <td><input id="xcoordinate" v-model="xcoordinate" placeholder="y-coordinate"></td>
           <td><label>Load from history</label></td>
           <td>
-            <select v-model="history">
-              <option v-for="x in history" v-bind:value="x">{{x}}</option>
+            <select v-model="history" v-on:change="fillInputBox">
+              <option disabled value="">Please select one</option>
+              <option v-for="option in options" v-bind:value="option.text">
+                {{option.text}}
+              </option>
             </select>
           </td>
         </tr>
         <tr>
           <td><label>Y-Coordinate:</label></td>
-          <td><input v-model="ycoordinate" placeholder="y-coordinate"></td>
+          <td><input id="ycoordinate" v-model="ycoordinate" placeholder="y-coordinate"></td>
         </tr>
         <tr>
           <td><label>N of points:</label></td>
@@ -54,7 +57,8 @@ export default {
     return {
       msg: 'Simple form with the desired data',
       errors: [],
-      history: [],
+      history: 'Choose',
+      options: [],
       points: 0,
       xcoordinate: 0.0,
       ycoordinate: 0.0,
@@ -71,10 +75,8 @@ export default {
       }
 
       this.errors = []
-      console.log()
       if (!this.xcoordinate || isNaN(parseFloat(this.xcoordinate))) {
         this.errors.push('X Coordinate is required and must be a float number')
-        console.error(this.xcoordinate)
       }
       if (!this.ycoordinate || isNaN(parseFloat(this.xcoordinate))) {
         this.errors.push('Y Coordinate is required')
@@ -97,11 +99,15 @@ export default {
           var historyList = []
           var i
           for (i = 0; i < data.length; i++) {
-            historyList.push(data[i]['request'])
+            historyList.push({text: data[i]['x_axes'] + '|' + data[i]['y_axes']  + '|' + data[i]['points']})
           }
-          vm.xcoordinate = historyList
-          console.log(vm.history)
+          vm.options = historyList
         })
+    },
+    fillInputBox () {
+      this.xcoordinate = this.history.split('|')[0]
+      this.ycoordinate = this.history.split('|')[1]
+      this.points = this.history.split('|')[2]
     }
   }
 }
